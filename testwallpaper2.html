@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Responsive wallpaper</title>
+<style></style>
+</head>
+
+<body>
+<div id="div-gpt-oop"></div>
+<script type="text/javascript">
+var backgroundImg1 = "wallpaper1920.jpg";//Viewport size 1600px and up In DFP you will just need to add the view through macro %%VIEW_URL_UNESC%% infront of each file
+var backgroundImg2 = "wallpaper1550.jpg";//Viewport size between 1200px and 1599px
+var backgroundImg3 = "wallpaper1024.jpg";//Viewport size less than 1200px
+var clickTag = "http://www.google.com"; // In DFP you will just need to add the click macro and the destination click-through macro when you set it up as a custom creative. Oterhwise you can setup a creative template. 
+
+ function readyToLoad(){
+	 //check window width
+if (window.innerWidth !== undefined && window.innerHeight !== undefined) {
+    var w = window.parent.document.documentElement.clientWidth;
+    var h = window.parent.document.documentElement.clientHeight;
+}
+//check window width and apply correct image for the current window width, this also looks for a specific container with a specific id. 
+if (w >= 1600) {
+    window.parent.document.getElementById("div-gpt-oop").style.background = 'url('+backgroundImg1+')';
+} else if (w >= 1200) {
+    window.parent.document.getElementById("div-gpt-oop").style.background = 'url('+backgroundImg2+')';
+} else if (w < 1200) {
+    window.parent.document.getElementById("div-gpt-oop").style.background = 'url('+backgroundImg3+')';
+}
+window.parent.document.getElementById("div-gpt-oop").style.backgroundRepeat = 'no-repeat';
+window.parent.document.getElementById("div-gpt-oop").style.backgroundPosition = 'center top';
+window.parent.document.getElementById("div-gpt-oop").style.backgroundAttachment = 'fixed';
+window.parent.document.getElementById("div-gpt-oop").style.width = "100%";
+window.parent.document.getElementById("div-gpt-oop").style.height = "100%";
+window.parent.document.getElementById("div-gpt-oop").style.position= "fixed";
+window.parent.document.getElementById("div-gpt-oop").style.zIndex= "1";
+//add click to the background image
+(function() {
+    var hotSpotLeft = window.parent.document.createElement('a');
+    var hotSpotRight = window.parent.document.createElement('a');
+    hotSpotLeft.id = 'hotSpotLeft';
+    hotSpotRight.id = 'hotSpotRight';
+    hotSpotLeft.setAttribute('href', ''+clickTag+'');
+    hotSpotRight.setAttribute('href', ''+clickTag+'');
+    hotSpotLeft.setAttribute('target', '_blank');
+    hotSpotRight.setAttribute('target', '_blank');
+    hotSpotLeft.style.display = hotSpotRight.style.display = 'block';
+    hotSpotLeft.style.height = hotSpotRight.style.height = '100%';
+    hotSpotLeft.style.width = hotSpotRight.style.width = '376px';
+    hotSpotLeft.style.position = hotSpotRight.style.position = 'fixed';
+    hotSpotLeft.style.zIndex = hotSpotRight.style.zIndex= "2";
+    hotSpotLeft.style.top = hotSpotRight.style.top = '0px';
+    hotSpotLeft.style.border = hotSpotRight.style.border = 'none';
+    hotSpotLeft.style.left = hotSpotRight.style.right = ((((window.parent.document.documentElement.clientWidth - 1168) / 2) - 376) + 'px');
+    window.parent.document.body.appendChild(hotSpotLeft);
+    window.parent.document.body.appendChild(hotSpotRight);
+})();
+//resize click area based on window size
+window.parent.document.onresize = function() {
+    window.parent.document.getElementById('hotSpotLeft').style.left = (((window.parent.document.documentElement.clientWidth - 1168) / 2) - 376) + 'px';
+    window.parent.document.getElementById('hotSpotRight').style.right = (((window.parent.document.documentElement.clientWidth - 1168) / 2) - 376) + 'px';
+};
+}
+//check when ad container finished loading in the dom
+window.parent.document.onreadystatechange = function () {
+    if (window.parent.document.readyState == "complete") {
+        readyToLoad();
+    }
+}
+
+</script>
+</body>
+</html>
