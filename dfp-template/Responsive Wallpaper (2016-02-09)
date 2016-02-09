@@ -1,0 +1,40 @@
+{
+  "name": "Responsive Wallpaper",
+  "description": "",
+  "variables": [
+    {
+      "mimeTypes": [],
+      "label": "Wallpaper (1920)",
+      "uniqueName": "Wallpaper1920",
+      "isRequired": true,
+      "variableType": "ASSET"
+    },
+    {
+      "mimeTypes": [],
+      "label": "Wallpaper (1200\u003e1600) ",
+      "uniqueName": "Wallpaper12001600",
+      "isRequired": true,
+      "variableType": "ASSET"
+    },
+    {
+      "mimeTypes": [],
+      "label": "Wallpaper (1080\u003e1200) ",
+      "uniqueName": "Wallpaper10801200",
+      "isRequired": true,
+      "variableType": "ASSET"
+    },
+    {
+      "isTrackingUrl": false,
+      "urlType": "STANDARD_HTTP",
+      "label": "Destination URL",
+      "uniqueName": "DestinationURL",
+      "isRequired": true,
+      "variableType": "URL"
+    }
+  ],
+  "formatter": "\u003cscript type\u003d\"text/javascript\"\u003e\nvar backgroundImg1 \u003d \"%%VIEW_URL_UNESC%%[%Wallpaper1920%]\";//Viewport size 1600px and up\nvar backgroundImg2 \u003d \"%%VIEW_URL_UNESC%%[%Wallpaper12001600%]\";//Viewport size between 1200px and 1599px\nvar backgroundImg3 \u003d \"%%VIEW_URL_UNESC%%[%Wallpaper10801200%]\";//Viewport size less than 1200px\nvar clickTag \u003d \"%%CLICK_URL_UNESC%%[%DestinationURL%]\";\n\n function readyToLoad(){\n\t //check window width\nif (window.innerWidth !\u003d\u003d undefined \u0026\u0026 window.innerHeight !\u003d\u003d undefined) {\n    var w \u003d window.parent.document.documentElement.clientWidth;\n    var h \u003d window.parent.document.documentElement.clientHeight;\n}\n//check window width and apply correct image for the windo width\nif (w \u003e\u003d 1600) {\n    window.parent.document.getElementById(\"div-gpt-oop\").style.background \u003d \u0027url(\u0027+backgroundImg1+\u0027)\u0027;\n} else if (w \u003e\u003d 1200) {\n    window.parent.document.getElementById(\"div-gpt-oop\").style.background \u003d \u0027url(\u0027+backgroundImg2+\u0027)\u0027;\n} else if (w \u003c 1200) {\n    window.parent.document.getElementById(\"div-gpt-oop\").style.background \u003d \u0027url(\u0027+backgroundImg3+\u0027)\u0027;\n}\nwindow.parent.document.getElementById(\"div-gpt-oop\").style.backgroundRepeat \u003d \u0027no-repeat\u0027;\nwindow.parent.document.getElementById(\"div-gpt-oop\").style.backgroundPosition \u003d \u0027center top\u0027;\nwindow.parent.document.getElementById(\"div-gpt-oop\").style.backgroundAttachment \u003d \u0027fixed\u0027;\nwindow.parent.document.getElementById(\"div-gpt-oop\").style.width \u003d \"100%\";\nwindow.parent.document.getElementById(\"div-gpt-oop\").style.height \u003d \"100%\";\nwindow.parent.document.getElementById(\"div-gpt-oop\").style.position\u003d \"fixed\";\nwindow.parent.document.getElementById(\"div-gpt-oop\").style.zIndex\u003d \"1\";\n//add click to the background image\n(function() {\n    var hotSpotLeft \u003d window.parent.document.createElement(\u0027a\u0027);\n    var hotSpotRight \u003d window.parent.document.createElement(\u0027a\u0027);\n    hotSpotLeft.id \u003d \u0027hotSpotLeft\u0027;\n    hotSpotRight.id \u003d \u0027hotSpotRight\u0027;\n    hotSpotLeft.setAttribute(\u0027href\u0027, \u0027\u0027+clickTag+\u0027\u0027);\n    hotSpotRight.setAttribute(\u0027href\u0027, \u0027\u0027+clickTag+\u0027\u0027);\n    hotSpotLeft.setAttribute(\u0027target\u0027, \u0027_blank\u0027);\n    hotSpotRight.setAttribute(\u0027target\u0027, \u0027_blank\u0027);\n    hotSpotLeft.style.display \u003d hotSpotRight.style.display \u003d \u0027block\u0027;\n    hotSpotLeft.style.height \u003d hotSpotRight.style.height \u003d \u0027100%\u0027;\n    hotSpotLeft.style.width \u003d hotSpotRight.style.width \u003d \u0027376px\u0027;\n    hotSpotLeft.style.position \u003d hotSpotRight.style.position \u003d \u0027fixed\u0027;\n    hotSpotLeft.style.zIndex \u003d hotSpotRight.style.zIndex\u003d \"2\";\n    hotSpotLeft.style.top \u003d hotSpotRight.style.top \u003d \u00270px\u0027;\n    hotSpotLeft.style.border \u003d hotSpotRight.style.border \u003d \u0027none\u0027;\n    hotSpotLeft.style.left \u003d hotSpotRight.style.right \u003d ((((window.parent.document.documentElement.clientWidth - 1168) / 2) - 376) + \u0027px\u0027);\n    window.parent.document.body.appendChild(hotSpotLeft);\n    window.parent.document.body.appendChild(hotSpotRight);\n})();\n//resize click area based on window size\nwindow.parent.document.onresize \u003d function() {\n    window.parent.document.getElementById(\u0027hotSpotLeft\u0027).style.left \u003d (((window.parent.document.documentElement.clientWidth - 1168) / 2) - 376) + \u0027px\u0027;\n    window.parent.document.getElementById(\u0027hotSpotRight\u0027).style.right \u003d (((window.parent.document.documentElement.clientWidth - 1168) / 2) - 376) + \u0027px\u0027;\n};\n}\n//check when ad container finished loading in the dom\nwindow.parent.document.onreadystatechange \u003d function () {\n    if (window.parent.document.readyState \u003d\u003d \"complete\") {\n        readyToLoad();\n    }\n}\n\n\u003c/script\u003e\n",
+  "type": "USER_DEFINED",
+  "isInterstitial": true,
+  "isNativeEligible": false,
+  "isSafeFrameCompatible": false
+}
